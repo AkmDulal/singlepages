@@ -155,12 +155,6 @@ function App() {
     },
   ];
 
-  const options = [
-    { value: 'Manufacturing', display: 'Manufacturing' },
-    { value: 'Construction materials', display: '   Construction materials' },
-    { value: 'Electronics and Optics', display: '   Electronics and Optics' },
-    { value: 'Food and Beverage', display: '   Food and Beverage' },
-  ];
 
   type FieldType = {
     name?: string;
