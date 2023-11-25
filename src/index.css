@@ -12,3 +12,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.ant-select-multiple .ant-select-selector {
+	padding: 5px 4px;
+}
