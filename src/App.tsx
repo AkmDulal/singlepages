@@ -102,6 +102,7 @@ function App() {
       title: 'Sectors',
       dataIndex: 'sectors',
       key: 'sectors',
+      width: 600,
       render: (sectors: string[]) => (
         <>
           {sectors.map(sector => (
@@ -123,7 +124,7 @@ function App() {
       render: (_: any, record: DataType) => {
         const editable = isEditing(record);
         return editable ? (
-          <Space>
+          <Space style={{display: 'inline-table'}}>
             <Button type="link" onClick={() => save(record.key)} style={{ marginRight: 8 }}>
               Save
             </Button>
@@ -132,7 +133,7 @@ function App() {
             </Button>
           </Space>
         ) : (
-          <Space>
+          <Space style={{display: 'inline-table'}}>
             <Button
               type="link"
               disabled={editingKey !== ''}
