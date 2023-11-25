@@ -18,6 +18,7 @@ function App() {
   const [modalVisible, setModalVisible] = useState(false);
   const [recordToDelete, setRecordToDelete] = useState<DataType | null>(null);
   const [showSubmitButton, setShowSubmitButton] = useState(true);
+  
 
   useEffect(() => {
     const storedData = localStorage.getItem('tableData');
@@ -81,8 +82,11 @@ function App() {
     setRecordToDelete(null);
   };
 
-  const handleChange = (value: string) => {
-    setSelectValue(value);
+  const handleChange = (value: any) => {
+    const trimmedValues = value?.map((value: string) => value.replace(/^\s+/, ''));
+    console.log(trimmedValues, "trimmedValuestrimmedValues trimmedValues");
+    
+  setSelectValue(trimmedValues);
   };
 
   const onFinish = (values: DataType) => {
@@ -151,6 +155,12 @@ function App() {
     },
   ];
 
+  const options = [
+    { value: 'Manufacturing', display: 'Manufacturing' },
+    { value: 'Construction materials', display: '   Construction materials' },
+    { value: 'Electronics and Optics', display: '   Electronics and Optics' },
+    { value: 'Food and Beverage', display: '   Food and Beverage' },
+  ];
 
   type FieldType = {
     name?: string;
@@ -193,84 +203,99 @@ function App() {
                 style={{ width: '100%' }}
               >
                 <Option value="Manufacturing">Manufacturing</Option>
-                <Option value="Construction materials">&nbsp;&nbsp;&nbsp;&nbsp;Construction materials</Option>
-                <Option value="Electronics and Optics">&nbsp;&nbsp;&nbsp;&nbsp;Electronics and Optics</Option>
-                <Option value="Food and Beverage">&nbsp;&nbsp;&nbsp;&nbsp;Food and Beverage</Option>
-                <Option value="Bakery &amp; confectionery products">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bakery &amp; confectionery products</Option>
-                <Option value="Beverages">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Beverages</Option>
-                <Option value="Fish &amp; fish products">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fish &amp; fish products </Option>
-                <Option value="Meat &amp; meat products">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meat &amp; meat products</Option>
-                <Option value="Milk &amp; dairy products">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Milk &amp; dairy products </Option>
-                <Option value="Other">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Other</Option>
-                <Option value="Sweets &amp; snack food">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sweets &amp; snack food</Option>
-                <Option value="Furniture">&nbsp;&nbsp;&nbsp;&nbsp;Furniture</Option>
-                <Option value="Bathroom/sauna">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bathroom/sauna </Option>
-                <Option value="Bedroom">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bedroom</Option>
-                <Option value="Children’s room">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Children’s room </Option>
-                <Option value="Kitchen">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kitchen </Option>
-                <Option value="Living room ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Living room </Option>
-                <Option value="Office">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Office</Option>
-                <Option value="Other (Furniture)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Other (Furniture)</Option>
-                <Option value="Outdoor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Outdoor </Option>
-                <Option value="Project furniture">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project furniture</Option>
-                <Option value="Machinery">&nbsp;&nbsp;&nbsp;&nbsp;Machinery</Option>
-                <Option value="Machinery components">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Machinery components</Option>
-                <Option value="Machinery equipment/tools">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Machinery equipment/tools</Option>
-                <Option value="Manufacture of machinery">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Manufacture of machinery </Option>
-                <Option value="Maritime">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maritime</Option>
-                <Option value="Aluminium and steel workboats">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aluminium and steel workboats </Option>
-                <Option value="Boat/Yacht building">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Boat/Yacht building</Option>
-                <Option value="Ship repair and conversion">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ship repair and conversion</Option>
-                <Option value="Metal structures">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Metal structures</Option>
-                <Option value="Other">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Other</Option>
-                <Option value="Repair and maintenance service">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Repair and maintenance service</Option>
-                <Option value="Metalworking">&nbsp;&nbsp;&nbsp;&nbsp;Metalworking</Option>
-                <Option value="Construction of metal structures">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Construction of metal structures</Option>
-                <Option value="Houses and buildings">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Houses and buildings</Option>
-                <Option value="Metal products">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Metal products</Option>
-                <Option value="Metal works">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Metal works</Option>
-                <Option value="CNC-machining">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CNC-machining</Option>
-                <Option value="Forgings, Fasteners">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Forgings, Fasteners </Option>
-                <Option value="Gas, Plasma, Laser cutting">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gas, Plasma, Laser cutting</Option>
-                <Option value="MIG, TIG, Aluminum welding">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MIG, TIG, Aluminum welding</Option>
-                <Option value="Plastic and Rubber">&nbsp;&nbsp;&nbsp;&nbsp;Plastic and Rubber</Option>
-                <Option value="Packaging">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Packaging</Option>
-                <Option value="Plastic goods">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plastic goods</Option>
-                <Option value="Plastic processing technology">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plastic processing technology</Option>
-                <Option value="Blowing">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Blowing</Option>
-                <Option value="Moulding">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Moulding</Option>
-                <Option value="Plastics welding and processing">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plastics welding and processing</Option>
-                <Option value="Plastic profiles">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plastic profiles</Option>
-                <Option value="Printing">&nbsp;&nbsp;&nbsp;&nbsp;Printing </Option>
-                <Option value="Advertising">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Advertising</Option>
-                <Option value="Book/Periodicals printing">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Book/Periodicals printing</Option>
-                <Option value="Labelling and packaging printing">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Labelling and packaging printing</Option>
-                <Option value="Textile and Clothing">&nbsp;&nbsp;&nbsp;&nbsp;Textile and Clothing</Option>
-                <Option value="Clothing">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clothing</Option>
-                <Option value="Textile">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Textile</Option>
-                <Option value="Wood">&nbsp;&nbsp;&nbsp;&nbsp;Wood</Option>
-                <Option value="Other (Wood)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Other (Wood)</Option>
-                <Option value="Wooden building materials">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wooden building materials</Option>
-                <Option value="Wooden houses">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wooden houses</Option>
-                <Option value="Other">Other</Option>
-                <Option value="Creative industries">&nbsp;&nbsp;&nbsp;&nbsp;Creative industries</Option>
-                <Option value="Energy technology">&nbsp;&nbsp;&nbsp;&nbsp;Energy technology</Option>
-                <Option value="Environment">&nbsp;&nbsp;&nbsp;&nbsp;Environment</Option>
-                <Option value="Service">Service</Option>
-                <Option value="Business services">&nbsp;&nbsp;&nbsp;&nbsp;Business services</Option>
-                <Option value="Engineering">&nbsp;&nbsp;&nbsp;&nbsp;Engineering</Option>
-                <Option value="Information Technology and Telecommunications">&nbsp;&nbsp;&nbsp;&nbsp;Information Technology and Telecommunications</Option>
-                <Option value="Data processing, Web portals, E-marketing">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data processing, Web portals, E-marketing</Option>
-                <Option value="Programming, Consultancy">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Programming, Consultancy</Option>
-                <Option value="Software, Hardware">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Software, Hardware</Option>
-                <Option value="Telecommunications">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Telecommunications</Option>
-                <Option value="Tourism">&nbsp;&nbsp;&nbsp;&nbsp;Tourism</Option>
-                <Option value="Translation services">&nbsp;&nbsp;&nbsp;&nbsp;Translation services</Option>
-                <Option value="Transport and Logistics">&nbsp;&nbsp;&nbsp;&nbsp;Transport and Logistics</Option>
-                <Option value="Air">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Air</Option>
-                <Option value="Rail">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rail</Option>
-                <Option value="Road">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Road</Option>
-                <Option value="Water">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Water</Option>
+                <Option className="p-30" value="Construction materials">Construction materials</Option>
+                <Option className="p-30" value="Electronics and Optics">Electronics and Optics</Option>
+                <Option className="p-30" value="Food and Beverage">Food and Beverage</Option>
+                
+                <Option className="p-45" value="Bakery &amp; confectionery products">Bakery &amp; confectionery products</Option>
+                <Option className="p-45" value="Beverages">Beverages</Option>
+                <Option className="p-45" value="Fish &amp; fish products">Fish &amp; fish products </Option>
+                <Option className="p-45" value="Meat &amp; meat products">Meat &amp; meat products</Option>
+                <Option className="p-45" value="Milk &amp; dairy products">Milk &amp; dairy products </Option>
+                <Option className="p-45" value="Other">Other</Option>
+                <Option className="p-45" value="Sweets &amp; snack food">Sweets &amp; snack food</Option>
+
+                <Option className="p-30" value="Furniture">Furniture</Option>
+                <Option className="p-45" value="Bathroom/sauna">Bathroom/sauna </Option>
+                <Option className="p-45" value="Bedroom">Bedroom</Option>
+                <Option className="p-45" value="Children’s room">Children’s room </Option>
+                <Option className="p-45" value="Kitchen">Kitchen </Option>
+                <Option className="p-45" value="Living room ">Living room </Option>
+                <Option className="p-45" value="Office">Office</Option>
+                <Option className="p-45" value="Other (Furniture)">Other (Furniture)</Option>
+                <Option className="p-45" value="Outdoor">Outdoor </Option>
+                <Option className="p-45" value="Project furniture">Project furniture</Option>
+
+                <Option className="p-30" value="Machinery">Machinery</Option>
+                <Option className="p-45" value="Machinery components">Machinery components</Option>
+                <Option className="p-45" value="Machinery equipment/tools">Machinery equipment/tools</Option>
+                <Option className="p-45" value="Manufacture of machinery">Manufacture of machinery </Option>
+                <Option className="p-45" value="Maritime">Maritime</Option>
+
+                <Option className="p-60" value="Aluminium and steel workboats">Aluminium and steel workboats </Option>
+                <Option className="p-60" value="Boat/Yacht building">Boat/Yacht building</Option>
+                <Option className="p-60" value="Ship repair and conversion">Ship repair and conversion</Option>
+
+                <Option className="p-45" value="Metal structures">Metal structures</Option>
+                <Option className="p-45" value="Other">Other</Option>
+                <Option className="p-45" value="Repair and maintenance service">Repair and maintenance service</Option>
+
+                <Option className="p-30" value="Metalworking">Metalworking</Option>
+                <Option className="p-45" value="Construction of metal structures">Construction of metal structures</Option>
+                <Option className="p-45" value="Houses and buildings">Houses and buildings</Option>
+                <Option className="p-45" value="Metal products">Metal products</Option>
+                <Option className="p-45" value="Metal works">Metal works</Option>
+
+                <Option className="p-60" value="CNC-machining">CNC-machining</Option>
+                <Option className="p-60" value="Forgings, Fasteners">Forgings, Fasteners </Option>
+                <Option className="p-60" value="Gas, Plasma, Laser cutting">Gas, Plasma, Laser cutting</Option>
+                <Option className="p-60" value="MIG, TIG, Aluminum welding">MIG, TIG, Aluminum welding</Option>
+
+                <Option className="p-30" value="Plastic and Rubber">Plastic and Rubber</Option>
+                <Option className="p-45" value="Packaging">Packaging</Option>
+                <Option className="p-45" value="Plastic goods">Plastic goods</Option>
+
+                <Option className="p-45" value="Plastic processing technology">Plastic processing technology</Option>
+                <Option className="p-60" value="Blowing">Blowing</Option>
+                <Option className="p-60" value="Moulding">Moulding</Option>
+                <Option className="p-60" value="Plastics welding and processing">Plastics welding and processing</Option>
+
+                <Option className="p-45" value="Plastic profiles">Plastic profiles</Option>
+                <Option className="p-30" value="Printing">Printing </Option>
+
+                <Option className="p-45" value="Advertising">Advertising</Option>
+                <Option className="p-45" value="Book/Periodicals printing">Book/Periodicals printing</Option>
+                <Option className="p-45" value="Labelling and packaging printing">Labelling and packaging printing</Option>
+
+                <Option className="p-30" value="Textile and Clothing">Textile and Clothing</Option>
+                <Option className="p-45" value="Clothing">Clothing</Option>
+                <Option className="p-45" value="Textile">Textile</Option>
+                <Option className="p-30" value="Wood">Wood</Option>
+                <Option className="p-45" value="Other (Wood)">Other (Wood)</Option>
+                <Option className="p-45" value="Wooden building materials">Wooden building materials</Option>
+                <Option className="p-45" value="Wooden houses">Wooden houses</Option>
+
+                <Option className="p-30" value="Other">Other</Option>
+                <Option className="p-45" value="Creative industries">Creative industries</Option>
+                <Option className="p-45" value="Energy technology">Energy technology</Option>
+                <Option className="p-45" value="Environment">Environment</Option>
+                <Option className="p-30" value="Service">Service</Option>
+                <Option className="p-45" value="Business services">Business services</Option>
+                <Option className="p-45" value="Engineering">Engineering</Option>
+                <Option className="p-45" value="Information Technology and Telecommunications">Information Technology and Telecommunications</Option>
+
+                <Option className="p-60" value="Data processing, Web portals, E-marketing">Data processing, Web portals, E-marketing</Option>
+                <Option className="p-60" value="Programming, Consultancy">Programming, Consultancy</Option>
+                <Option className="p-60" value="Software, Hardware">Software, Hardware</Option>
+                <Option className="p-60" value="Telecommunications">Telecommunications</Option>
+
+                <Option className="p-45" value="Tourism">Tourism</Option>
+                <Option className="p-45" value="Translation services">Translation services</Option>
+                <Option className="p-45" value="Transport and Logistics">Transport and Logistics</Option>
+                <Option className="p-60" value="Air">Air</Option>
+                <Option className="p-60" value="Rail">Rail</Option>
+                <Option className="p-60" value="Road">Road</Option>
+                <Option className="p-60" value="Water">Water</Option>
               </Select>
             </Form.Item>
 
