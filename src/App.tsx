@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Select, Col, Row, Button, Checkbox, Form, Input, Table, Space, Modal, Badge  } from 'antd';
+import { Select, Col, Row, Button, Checkbox, Form, Input, Table, Space, Modal, Badge } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
@@ -18,7 +18,7 @@ function App() {
   const [modalVisible, setModalVisible] = useState(false);
   const [recordToDelete, setRecordToDelete] = useState<DataType | null>(null);
   const [showSubmitButton, setShowSubmitButton] = useState(true);
-  
+
 
   useEffect(() => {
     const storedData = localStorage.getItem('tableData');
@@ -85,8 +85,8 @@ function App() {
   const handleChange = (value: any) => {
     const trimmedValues = value?.map((value: string) => value.replace(/^\s+/, ''));
     console.log(trimmedValues, "trimmedValuestrimmedValues trimmedValues");
-    
-  setSelectValue(trimmedValues);
+
+    setSelectValue(trimmedValues);
   };
 
   const onFinish = (values: DataType) => {
@@ -105,7 +105,7 @@ function App() {
       render: (sectors: string[]) => (
         <>
           {sectors.map(sector => (
-            <Badge key={sector} status="processing"  text={sector} />
+            <Badge key={sector} status="processing" text={sector} />
           ))}
         </>
       ),
@@ -164,11 +164,11 @@ function App() {
 
   return (
     <div>
-      <h2>Select Category:</h2>
 
       <Row justify="center" align="middle" style={{ minHeight: '100%' }}>
-        <Col span={8}>
+        <Col xs={24} sm={16} md={12} lg={10} xl={8}>
 
+        <h2 style={{color: '#222'}}> Please enter your name and pick the Sectors you are currently involved in. </h2>
           <Form
             form={form}
             name="basic"
@@ -200,7 +200,7 @@ function App() {
                 <Option className="p-30" value="Construction materials">Construction materials</Option>
                 <Option className="p-30" value="Electronics and Optics">Electronics and Optics</Option>
                 <Option className="p-30" value="Food and Beverage">Food and Beverage</Option>
-                
+
                 <Option className="p-45" value="Bakery &amp; confectionery products">Bakery &amp; confectionery products</Option>
                 <Option className="p-45" value="Beverages">Beverages</Option>
                 <Option className="p-45" value="Fish &amp; fish products">Fish &amp; fish products </Option>
@@ -326,6 +326,7 @@ function App() {
             bordered
             pagination={false}
             rowKey={(record) => record.key as string}
+            scroll={{ x: true }}
           />
           {/* : ''} */}
 
